@@ -57,5 +57,13 @@ class BookCategorySeeder extends Seeder
             'book_id' => 5,
             'category_id' => 3
         ]);
+        BookCategory::create([
+            'book_id' => 6,
+            'category_id' => 6
+        ]);
+        BookCategory::create([
+            'book_id' => 6,
+            'category_id' => 5
+        ]);
     }
 }

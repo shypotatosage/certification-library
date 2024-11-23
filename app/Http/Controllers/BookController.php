@@ -19,10 +19,12 @@ class BookController extends Controller
         if ($request->filled('search')) {
             $search = $request->search;
             
-            $query->where('name', 'like', "%{$search}%")
-            ->orWhere('publisher', 'like', "%{$search}%")
-            ->orWhere('author', 'like', "%{$search}%")
-            ->orWhere('published_year', 'like', "%{$search}%");
+            $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('publisher', 'like', "%{$search}%")
+                    ->orWhere('author', 'like', "%{$search}%")
+                    ->orWhere('published_year', 'like', "%{$search}%");
+            });
         }
 
         if ($request->filled('category')) {
@@ -47,8 +49,29 @@ class BookController extends Controller
      */
     public function displayBorrowedBooks(Request $request)
     {
-        $books = Book::where('borrower_id', '=', Auth::id())->get();
+        $query = Book::query();
 
+        if ($request->filled('search')) {
+            $search = $request->search;
+            
+            $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('publisher', 'like', "%{$search}%")
+                    ->orWhere('author', 'like', "%{$search}%")
+                    ->orWhere('published_year', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('category')) {
+            $category = $request->category;
+
+            $query->whereHas('categories', function ($q) use ($category) {
+                $q->where('name', $category);
+            });
+        }
+
+        $books = $query->where('borrower_id', '=', Auth::id())->get();
+        
         return view('books.my-books', [     
             'title'=>'My Books',
             'books' => $books,
