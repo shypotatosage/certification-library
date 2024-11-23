@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class BookController extends Controller
 {
     /**
-     * Display a listing of the books available, also filtering the categories and search text if available.
+     * Display a listing of the books available, also filtered by the categories and search text if available.
      */
     public function displayBooks(Request $request)
     {
@@ -41,17 +41,29 @@ class BookController extends Controller
             'categories' => Category::all()
         ]);
     }
+
     /**
-     * Display a listing of the books available, also filtering the categories and search text if available.
+     * Display a listing of the books that has been borrowed by the user, also filtered by the categories and search text if available.
      */
     public function displayBorrowedBooks(Request $request)
     {
-        $books = Book::where('loanee_id', '=', Auth::id())->get();
+        $books = Book::where('borrower_id', '=', Auth::id())->get();
 
-        return view('my-books', [     
+        return view('books.my-books', [     
             'title'=>'My Books',
             'books' => $books,
             'categories' => Category::all()
+        ]);
+    }
+
+    /**
+     * Display the specified book.
+     */
+    public function displayBook(Request $request)
+    {
+        return view('books.book-detail', [     
+            'title'=>'Book',
+            'book' => Book::findOrFail($request->id)
         ]);
     }
 

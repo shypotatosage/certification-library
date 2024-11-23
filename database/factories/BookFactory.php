@@ -20,12 +20,12 @@ class BookFactory extends Factory
         return [
             'book_cover' => $this->faker->imageUrl(640, 480, 'books', true, 'Book Cover'),
             'name' => $this->faker->sentence(3),
-            'description' => $this->faker->paragraphs(3, true),
+            'description' => $this->faker->paragraphs(8, true),
             'primary_author' => $this->faker->name,
             'publisher' => $this->faker->company,
             'published_year' => $this->faker->year,
             'isbn' => $this->faker->isbn13,
-            'loanee_id' => $this->faker->boolean(40) ? User::factory() : null,
+            'borrower_id' => $this->faker->boolean(40) ? User::factory() : null,
         ];
     }
 }

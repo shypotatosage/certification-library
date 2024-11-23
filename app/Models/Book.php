@@ -16,7 +16,7 @@ class Book extends Model
         "primary_author",
         "publisher",
         "published_year",
-        "loanee_id",
+        "borrower_id",
         "status"
     ];
     
@@ -24,7 +24,7 @@ class Book extends Model
         return $this->belongsToMany(Category::class, 'book_categories', 'book_id', 'category_id');
     }
     
-    public function loanee(){
-        return $this->belongsTo(User::class, 'loanee_id');
+    public function borrower(){
+        return $this->belongsTo(User::class, 'borrower_id');
     }
 }

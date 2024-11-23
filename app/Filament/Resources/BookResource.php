@@ -49,9 +49,9 @@ class BookResource extends Resource
                     ->label('ISBN')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('loanee_id')
+                Forms\Components\Select::make('borrower_id')
                     ->label('Loaned To')
-                    ->relationship('loanee', 'name'),
+                    ->relationship('borrower', 'name'),
             ]);
     }
 
@@ -76,7 +76,7 @@ class BookResource extends Resource
                 Tables\Columns\TextColumn::make('isbn')
                     ->label('ISBN')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('loanee.name')
+                Tables\Columns\TextColumn::make('borrower.name')
                     ->label('Loaned To')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
