@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('author');
             $table->string('publisher');
             $table->integer('published_year');
-            $table->string('isbn');
+            $table->string('isbn', 20);
             $table->foreignId('borrower_id')->nullable()->constrained('users', 'id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

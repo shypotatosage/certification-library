@@ -43,12 +43,12 @@ class BookResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('published_year')
                     ->label('Published Year')
-                    ->required()
-                    ->maxLength(255),
+                    ->numeric()
+                    ->required(),
                 Forms\Components\TextInput::make('isbn')
                     ->label('ISBN')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(20),
                 Forms\Components\Select::make('borrower_id')
                     ->label('Loaned To')
                     ->relationship('borrower', 'name'),
