@@ -21,7 +21,7 @@ class BookFactory extends Factory
             'book_cover' => $this->faker->imageUrl(640, 480, 'books', true, 'Book Cover'),
             'name' => $this->faker->sentence(3),
             'description' => $this->faker->paragraphs(8, true),
-            'primary_author' => $this->faker->name,
+            'author' => $this->faker->name,
             'publisher' => $this->faker->company,
             'published_year' => $this->faker->year,
             'isbn' => $this->faker->isbn13,

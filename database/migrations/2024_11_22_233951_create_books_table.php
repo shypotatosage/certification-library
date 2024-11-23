@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('book_cover');
             $table->string('name');
             $table->text('description');
-            $table->string('primary_author');
+            $table->string('author');
             $table->string('publisher');
-            $table->string('published_year');
+            $table->integer('published_year');
             $table->string('isbn');
             $table->foreignId('borrower_id')->nullable()->constrained('users', 'id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

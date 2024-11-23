@@ -21,7 +21,7 @@ class BookController extends Controller
             
             $query->where('name', 'like', "%{$search}%")
             ->orWhere('publisher', 'like', "%{$search}%")
-            ->orWhere('primary_author', 'like', "%{$search}%")
+            ->orWhere('author', 'like', "%{$search}%")
             ->orWhere('published_year', 'like', "%{$search}%");
         }
 
@@ -68,50 +68,30 @@ class BookController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Update the specified book's borrower_id to user_id to indicate that the book is currently borrowed
      */
-    public function create()
+    public function borrowBook(Request $request)
     {
-        //
+        $book = Book::findOrFail($request->book_id);
+
+        $book->borrower_id = Auth::id();
+
+        $book->save();
+
+        return redirect("/book/" . $request->book_id);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update the specified book's borrower_id to null to indicate that the book has been returned and is ready to be borrowed
      */
-    public function store(Request $request)
+    public function returnBook(Request $request)
     {
-        //
-    }
+        $book = Book::findOrFail($request->book_id);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Book $book)
-    {
-        //
-    }
+        $book->borrower_id = null;
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Book $book)
-    {
-        //
-    }
+        $book->save();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Book $book)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Book $book)
-    {
-        //
+        return redirect("/book/" . $request->book_id);
     }
 }

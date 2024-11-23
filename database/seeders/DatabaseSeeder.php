@@ -17,13 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::factory()->count(10)->create();
-        $books = Book::factory()->count(5)->create();
-        $categories = Category::factory()->count(3)->create();
-    
-        // Assign categories to books
-        foreach ($books as $book) {
-            BookCategory::factory()->count(2)->create(['book_id' => $book->id]);
-        }
+        $this->call([
+            UserSeeder::class,
+            BookSeeder::class,
+            CategorySeeder::class,
+            BookCategorySeeder::class,
+        ]);
     }
 }

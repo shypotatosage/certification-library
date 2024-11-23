@@ -13,7 +13,7 @@ class Book extends Model
         "book_cover",
         "name",
         "description",
-        "primary_author",
+        "author",
         "publisher",
         "published_year",
         "borrower_id",

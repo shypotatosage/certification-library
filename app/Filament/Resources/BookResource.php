@@ -34,7 +34,7 @@ class BookResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('description')
                     ->required(),
-                Forms\Components\TextInput::make('primary_author')
+                Forms\Components\TextInput::make('author')
                     ->label('Primary Author')
                     ->required()
                     ->maxLength(255),
@@ -52,6 +52,11 @@ class BookResource extends Resource
                 Forms\Components\Select::make('borrower_id')
                     ->label('Loaned To')
                     ->relationship('borrower', 'name'),
+                Forms\Components\Select::make('categories')
+                    ->label('Categories')
+                    ->multiple()
+                    ->relationship('categories', 'name')
+                    ->required(),
             ]);
     }
 
@@ -65,7 +70,7 @@ class BookResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('primary_author')
+                Tables\Columns\TextColumn::make('author')
                     ->label('Primary Author')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('publisher')
