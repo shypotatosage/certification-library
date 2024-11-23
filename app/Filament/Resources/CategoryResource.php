@@ -19,6 +19,9 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    /**
+     * Structure of the form for the Edit & Add New Category in the Admin Panel
+     */
     public static function form(Form $form): Form
     {
         return $form
@@ -29,6 +32,9 @@ class CategoryResource extends Resource
             ]);
     }
 
+    /**
+     * Structure of the table for the List of Categories in the Admin Panel
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -38,13 +44,11 @@ class CategoryResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created At')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Updated At')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
             ])
             ->filters([
                 //

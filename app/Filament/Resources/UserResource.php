@@ -19,6 +19,9 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    /**
+     * Structure of the form for the Edit & Add New User in the Admin Panel
+     */
     public static function form(Form $form): Form
     {
         return $form
@@ -30,8 +33,6 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\DateTimePicker::make('email_verified_at')
-                    ->label('Email Verified At'),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required()
@@ -42,6 +43,9 @@ class UserResource extends Resource
             ]);
     }
 
+    /**
+     * Structure of the table for the List of Users in the Admin Panel
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -50,23 +54,17 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->label('Email Verified At')
-                    ->dateTime()
-                    ->sortable(),
                 Tables\Columns\IconColumn::make('is_admin')
                     ->label('Is Admin')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created At')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Updated At')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
             ])
             ->filters([
                 //

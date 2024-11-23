@@ -59,7 +59,7 @@ class BookController extends Controller
     /**
      * Display the specified book.
      */
-    public function displayBook(Request $request)
+    public function displayBookDetail(Request $request)
     {
         return view('books.book-detail', [     
             'title'=>'Book',

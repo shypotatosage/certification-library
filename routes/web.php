@@ -5,10 +5,10 @@ use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BookController::class, 'displayBooks'])->name('home');
+Route::get('/book/{id}', [BookController::class, 'displayBookDetail']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/my-books', [BookController::class, 'displayBorrowedBooks']);
-    Route::get('/book/{id}', [BookController::class, 'displayBook']);
     Route::post('/borrow-book', [BookController::class, 'borrowBook'])->name('borrow.book');
     Route::post('/return-book', [BookController::class, 'returnBook'])->name('return.book');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

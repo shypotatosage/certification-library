@@ -19,6 +19,9 @@ class BookResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    /**
+     * Structure of the form for the Edit & Add New Book in the Admin Panel
+     */
     public static function form(Form $form): Form
     {
         return $form
@@ -35,7 +38,7 @@ class BookResource extends Resource
                 Forms\Components\TextInput::make('description')
                     ->required(),
                 Forms\Components\TextInput::make('author')
-                    ->label('Primary Author')
+                    ->label('Author(s)')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('publisher')
@@ -50,7 +53,7 @@ class BookResource extends Resource
                     ->required()
                     ->maxLength(20),
                 Forms\Components\Select::make('borrower_id')
-                    ->label('Loaned To')
+                    ->label('Borrowed By')
                     ->relationship('borrower', 'name'),
                 Forms\Components\Select::make('categories')
                     ->label('Categories')
@@ -60,6 +63,9 @@ class BookResource extends Resource
             ]);
     }
 
+    /**
+     * Structure of the table for the List of Books in the Admin Panel
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -71,7 +77,7 @@ class BookResource extends Resource
                 Tables\Columns\TextColumn::make('description')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('author')
-                    ->label('Primary Author')
+                    ->label('Author(s)')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('publisher')
                     ->searchable(),
@@ -82,18 +88,16 @@ class BookResource extends Resource
                     ->label('ISBN')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('borrower.name')
-                    ->label('Loaned To')
+                    ->label('Borrowed By')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created At')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Updated At')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
             ])
             ->filters([
                 //
