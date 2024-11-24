@@ -36,6 +36,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required()
+                    ->minLength(8)
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_admin')
                     ->label('Is Admin')
