@@ -86,7 +86,6 @@ class BookResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('isbn')
                     ->label('ISBN')
-                    ->maxLength(20)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('borrower.name')
                     ->label('Borrowed By')
