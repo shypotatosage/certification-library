@@ -16,6 +16,7 @@ class Book extends Model
         "author",
         "publisher",
         "published_year",
+        "isbn",
         "borrower_id",
         "status"
     ];
@@ -26,5 +27,16 @@ class Book extends Model
     
     public function borrower(){
         return $this->belongsTo(User::class, 'borrower_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($book) {
+            if ($book->book_cover) {
+                \Storage::disk('public')->delete($book->book_cover);
+            }
+        });
     }
 }

@@ -50,8 +50,8 @@ class BookResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('isbn')
                     ->label('ISBN')
-                    ->required()
-                    ->maxLength(20),
+                    ->maxLength(20)
+                    ->required(),
                 Forms\Components\Select::make('borrower_id')
                     ->label('Borrowed By')
                     ->relationship('borrower', 'name'),
